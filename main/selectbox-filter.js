@@ -31,6 +31,8 @@
         } else {
             return s.toLowerCase().normalize('NFKC').replace(/[ァ-ン]/g, function(s) {
                 return String.fromCharCode(s.charCodeAt(0) - 0x60);
+            }).replace(/[！-～]/g, function(s) {
+                return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
             });
         }
     };
