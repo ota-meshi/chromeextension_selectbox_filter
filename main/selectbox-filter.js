@@ -1,6 +1,7 @@
-﻿(function() {
+﻿(() => {
     'use strict';
-    let input = document.createElement('input');
+
+    const input = document.createElement('input');
     input.setAttribute('placeholder', 'enter filter keyword');
     input.style.backgroundImage = 'url("' + chrome.extension.getURL('/icons/icon16.png') + '")';
     input.style.backgroundRepeat = 'no-repeat';
@@ -9,61 +10,50 @@
     let options;
     let originalDisplays;
     
-    let getDisplays = function(opts) {
-        let result = [];
-        for (let i = 0; i < opts.length; i++) {
-            result.push(opts[i].style.display);
-        }
-        return result;
-    };
+    const getDisplays = opts => Array.prototype.map.call(opts, opt => opt.style.display);
     
-    let resetDisplays = function(opts, orgDisps) {
-        let result = [];
-        for (let i = 0; i < opts.length; i++) {
-            opts[i].style.display = orgDisps[i];
-        }
-        return result;
-    };
+    const resetDisplays = (opts, orgDisps) => Array.prototype.forEach.call(opts, (opt, i) => opts[i].style.display = orgDisps[i]);
     
-    let adjustString = function(s) {
-        if (!s) {
-            return '';
-        } else {
-            return s.toLowerCase().normalize('NFKC').replace(/[ァ-ン]/g, function(s) {
-                return String.fromCharCode(s.charCodeAt(0) - 0x60);
-            }).replace(/[！-～]/g, function(s) {
-                return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-            });
-        }
+    const adjustString = s => s ? s.toLowerCase().normalize('NFKC')
+                .replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60))
+                .replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
+                : '';
+
+    const onchange = select => {
+        const evt = document.createEvent('Event');
+        evt.initEvent('change', true, true);
+        select.dispatchEvent(evt);
     };
+
     
-    input.addEventListener('keyup', function() {
-        let value = adjustString(input.value);
-        let match = value ? function(option) {
+    input.addEventListener('keyup', () => {
+        const value = adjustString(input.value);
+        const match = value ? option => {
             return adjustString(option.textContent).indexOf(value) > -1;
-        } : function(option) {
+        } : option => {
             return true;
         };
-        let befSelectedIndex = select.selectedIndex;
-        let dispOpt = [];
-        for (let i = 0; i < options.length; i++) {
-            if (match(options[i])) {
-                options[i].style.display = originalDisplays[i];
+        const befSelectedIndex = select.selectedIndex;
+        const dispOpt = [];
+        Array.prototype.forEach.call(options ,(option, i) => {
+            if (match(option)) {
+                option.style.display = originalDisplays[i];
                 if (originalDisplays[i] !== 'none') {
                     dispOpt.push(i);
                 }
             } else {
-                options[i].style.display = 'none';
+                option.style.display = 'none';
             }
-            if (options[i].textContent === value) {
+            if (option.textContent === value) {
                 select.selectedIndex = i;
             }
-        }
+        });
         if (dispOpt.length > 0 && dispOpt.indexOf(befSelectedIndex) < 0) {
             select.selectedIndex = dispOpt[0];
+            onchange(select);
         }
     });
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', e => {
         if (e.ctrlKey && e.target.tagName.toLowerCase() === 'select') {
             if (select === e.target) {
                 return;
