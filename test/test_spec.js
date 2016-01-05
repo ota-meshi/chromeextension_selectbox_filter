@@ -6,8 +6,12 @@ function getDiaplayOptions(select) {
 }
 
 function ctrlClick(select) {
-    const evt = document.createEvent('MouseEvents');
-    evt.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null );
+    const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+        ctrlKey : true,
+    });
     select.dispatchEvent(evt);
 }
 
@@ -17,8 +21,8 @@ function keyup(input) {
     input.dispatchEvent(evt);
 }
 
-describe("suite", function() {
-    it("filter", function() {
+describe("filter suite", () => {
+    it("filter", () => {
         const select = document.getElementById('language');
         ctrlClick(select);
         const input = select.previousSibling;
@@ -31,7 +35,7 @@ describe("suite", function() {
         expect(dispOptions.length).toBe(3);
     });
     
-    it("filter ABC", function() {
+    it("filter ABC", () => {
         const select = document.getElementById('chars');
         ctrlClick(select);
         const input = select.previousSibling;
@@ -52,7 +56,7 @@ describe("suite", function() {
         expect(dispOptions[0].textContent).toBe('abcd');
     });
     
-    it("filter ｶﾅ", function() {
+    it("filter ｶﾅ", () => {
         const select = document.getElementById('chars');
         ctrlClick(select);
         const input = select.previousSibling;
@@ -72,7 +76,7 @@ describe("suite", function() {
         expect(dispOptions.length).toBe(1);
         expect(dispOptions[0].textContent).toBe('ｱｲｳｴｵ');
     });
-    it("filter disp", function() {
+    it("filter disp", () => {
         const select = document.getElementById('disp');
         ctrlClick(select);
         const input = select.previousSibling;
@@ -84,8 +88,10 @@ describe("suite", function() {
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
     });
-    
-    it("change event", function() {
+});
+
+describe("event suite", () => {
+    it("change event", () => {
         const spy = jasmine.createSpy();
         const select = $('<select><option value="1">option1</option><option value="2">change event test</option></select>')[0];
         $('#test').append(select);
@@ -102,7 +108,7 @@ describe("suite", function() {
         expect(spy).toHaveBeenCalled();
     });
     
-    it("change event JQuery", function() {
+    it("change event JQuery", () => {
         const spy = jasmine.createSpy();
         const select = $('<select><option value="1">option1</option><option value="2">change event test JQuery</option></select>')[0];
         $('#test').append(select);
@@ -119,7 +125,7 @@ describe("suite", function() {
         expect(spy).toHaveBeenCalled();
     });
     
-    it("change event onChange", function() {
+    it("change event onChange", () => {
         const spy = jasmine.createSpy();
         window.onChangeTestSpy = spy;
         const select = $('<select onChange="onChangeTestSpy()"><option value="1">option1</option><option value="2">change event test onChange</option></select>')[0];
@@ -135,7 +141,89 @@ describe("suite", function() {
         expect(dispOptions.length).toBe(1);
         expect(spy).toHaveBeenCalled();
     });
+});
 
+describe("delay event suite", () => {
+    beforeEach(function() {
+        jasmine.clock().install();
+    });
+    afterEach(function() {
+        jasmine.clock().uninstall();
+    });
+    it("delay change event", () => {
+        const spy = jasmine.createSpy();
+        const select = $('<select><option value="1">option1</option><option value="2">delay change event test</option><option value="3">test</option></select>')[0];
+        $('#test').append(select);
+        select.addEventListener('change', spy);
+        ctrlClick(select);
+        const input = select.previousSibling;
+        expect(input.tagName.toLowerCase()).toBe('input');
+        
+        input.value = 'test';
+        keyup(input);
+        
+        let dispOptions = getDiaplayOptions(select);
+        expect(dispOptions.length).toBe(2);
+        expect(spy).not.toHaveBeenCalled();
+        
+        jasmine.clock().tick(1100);
+        
+        expect(spy).toHaveBeenCalled();
+    });
+});
+
+describe("delay event 2 suite", () => {
+    it("delay change event2", done => {
+        const waits = time => {
+            let fn;
+            let end = false;
+            setTimeout(() => {
+                if (fn) fn();
+                if (end) done();
+            }, time);
+            return {
+                runs : delayfn => {
+                    fn = delayfn;
+                    return {
+                        waits : time2 => {
+                            return waits(time + time2);
+                        },
+                        done : () => {
+                            end = true;
+                        },
+                    };
+                },
+            };
+        };
+        const spy = jasmine.createSpy();
+        const select = $('<select><option value="1">option1</option><option value="2">delay change event test</option><option value="3">test</option></select>')[0];
+        $('#test').append(select);
+        select.addEventListener('change', spy);
+        ctrlClick(select);
+        const input = select.previousSibling;
+        expect(input.tagName.toLowerCase()).toBe('input');
+        
+        input.value = 'te';
+        keyup(input);
+        
+        let dispOptions = getDiaplayOptions(select);
+        expect(dispOptions.length).toBe(2);
+        expect(spy).not.toHaveBeenCalled();
+        
+        waits(500).runs(() => {
+            expect(spy).not.toHaveBeenCalled();
+            input.value = 'test';
+            keyup(input);
+        })
+        .waits(600).runs(() => {
+            expect(spy).not.toHaveBeenCalled();
+        })
+        .waits(500).runs(() => {
+            expect(spy).toHaveBeenCalled();
+        })
+        .done();
+    });
+    
     if (window.jscoverage_report) {
         jscoverage_report();
     }

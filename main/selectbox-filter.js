@@ -9,6 +9,7 @@
     let select;
     let options;
     let originalDisplays;
+    let timeoutIdOnChange = 0;
     
     const getDisplays = opts => Array.prototype.map.call(opts, opt => opt.style.display);
     
@@ -23,8 +24,8 @@
         const evt = document.createEvent('Event');
         evt.initEvent('change', true, true);
         select.dispatchEvent(evt);
+        timeoutIdOnChange = 0;
     };
-
     
     input.addEventListener('keyup', () => {
         const value = adjustString(input.value);
@@ -48,9 +49,26 @@
                 select.selectedIndex = i;
             }
         });
+        let delayOnChange = false;
+        if (timeoutIdOnChange) {
+            clearTimeout(timeoutIdOnChange);
+            delayOnChange = true;
+            timeoutIdOnChange = 0;
+        }
         if (dispOpt.length > 0 && dispOpt.indexOf(befSelectedIndex) < 0) {
             select.selectedIndex = dispOpt[0];
-            onchange(select);
+            if (dispOpt.length === 1) {
+                onchange(select);
+                delayOnChange = false;
+            } else {
+                delayOnChange = true;
+            }
+        }
+        if (delayOnChange) {
+            let sel = select;
+            timeoutIdOnChange = setTimeout(() => {
+                onchange(sel);
+            }, 1000);
         }
     });
     document.addEventListener('click', e => {
@@ -61,6 +79,7 @@
             if (options) {
                 resetDisplays(options, originalDisplays);
             }
+            timeoutIdOnChange = 0;
             
             select = e.target;
             options = select.getElementsByTagName('option');
@@ -71,3 +90,4 @@
         }
     });
 })();
+
