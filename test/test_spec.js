@@ -1,4 +1,6 @@
-﻿'use strict';
+/*eslint-env es6 */
+
+'use strict';
 
 function getDiaplayOptions(select) {
     const options = select.getElementsByTagName('option');
@@ -21,77 +23,77 @@ function keyup(input) {
     input.dispatchEvent(evt);
 }
 
-describe("filter suite", () => {
-    it("filter", () => {
+describe('filter suite', () => {
+    it('filter', () => {
         const select = document.getElementById('language');
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = '英';
         keyup(input);
-        
+
         const dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(3);
     });
     
-    it("filter ABC", () => {
+    it('filter ABC', () => {
         const select = document.getElementById('chars');
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'ABC';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(dispOptions[0].textContent).toBe('abcd');
-        
+
         input.value = 'ａｂｃ';
         keyup(input);
-        
+
         dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(dispOptions[0].textContent).toBe('abcd');
     });
     
-    it("filter ｶﾅ", () => {
+    it('filter ｶﾅ', () => {
         const select = document.getElementById('chars');
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'アイウ';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(dispOptions[0].textContent).toBe('ｱｲｳｴｵ');
-        
+
         input.value = 'あいう';
         keyup(input);
-        
+
         dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(dispOptions[0].textContent).toBe('ｱｲｳｴｵ');
     });
-    it("filter disp", () => {
+    it('filter disp', () => {
         const select = document.getElementById('disp');
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'disp';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
     });
 });
 
-describe("event suite", () => {
-    it("change event", () => {
+describe('event suite', () => {
+    it('change event', () => {
         const spy = jasmine.createSpy();
         const select = $('<select><option value="1">option1</option><option value="2">change event test</option></select>')[0];
         $('#test').append(select);
@@ -99,16 +101,16 @@ describe("event suite", () => {
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'test';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(spy).toHaveBeenCalled();
     });
     
-    it("change event JQuery", () => {
+    it('change event JQuery', () => {
         const spy = jasmine.createSpy();
         const select = $('<select><option value="1">option1</option><option value="2">change event test JQuery</option></select>')[0];
         $('#test').append(select);
@@ -116,16 +118,16 @@ describe("event suite", () => {
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'test';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(spy).toHaveBeenCalled();
     });
     
-    it("change event onChange", () => {
+    it('change event onChange', () => {
         const spy = jasmine.createSpy();
         window.onChangeTestSpy = spy;
         const select = $('<select onChange="onChangeTestSpy()"><option value="1">option1</option><option value="2">change event test onChange</option></select>')[0];
@@ -133,24 +135,24 @@ describe("event suite", () => {
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'test';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(1);
         expect(spy).toHaveBeenCalled();
     });
 });
 
-describe("delay event suite", () => {
+describe('delay event suite', () => {
     beforeEach(function() {
         jasmine.clock().install();
     });
     afterEach(function() {
         jasmine.clock().uninstall();
     });
-    it("delay change event", () => {
+    it('delay change event', () => {
         const spy = jasmine.createSpy();
         const select = $('<select><option value="1">option1</option><option value="2">delay change event test</option><option value="3">test</option></select>')[0];
         $('#test').append(select);
@@ -158,22 +160,22 @@ describe("delay event suite", () => {
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'tes';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(2);
         expect(spy).not.toHaveBeenCalled();
-        
+
         jasmine.clock().tick(1100);
-        
+
         expect(spy).toHaveBeenCalled();
     });
 });
 
-describe("delay event 2 suite", () => {
-    it("delay change event2", done => {
+describe('delay event 2 suite', () => {
+    it('delay change event2', done => {
         const waits = time => {
             let fn;
             let end = false;
@@ -202,14 +204,14 @@ describe("delay event 2 suite", () => {
         ctrlClick(select);
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
-        
+
         input.value = 'te';
         keyup(input);
-        
+
         let dispOptions = getDiaplayOptions(select);
         expect(dispOptions.length).toBe(2);
         expect(spy).not.toHaveBeenCalled();
-        
+
         waits(500).runs(() => {
             expect(spy).not.toHaveBeenCalled();
             input.value = 'tes';
@@ -218,12 +220,12 @@ describe("delay event 2 suite", () => {
         .waits(600).runs(() => {
             expect(spy).not.toHaveBeenCalled();
         })
-        .waits(500).runs(() => {
+        .waits(600).runs(() => {
             expect(spy).toHaveBeenCalled();
         })
         .done();
     });
-    
+
     if (window.jscoverage_report) {
         jscoverage_report();
     }
