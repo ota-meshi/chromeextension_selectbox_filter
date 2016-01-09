@@ -1,6 +1,7 @@
-﻿(() => {
+/*eslint-env es6*/
+(() => {
     'use strict';
-    const appendStyleSheet = inputId => {
+    const appendStyleSheet = (inputId) => {
         const style = document.createElement('style');
         style.innerHTML = '#' + inputId + '::-webkit-calendar-picker-indicator {opacity: 0;}';
         const head = document.getElementsByTagName('head')[0];
@@ -37,11 +38,11 @@
     let options;
     let originalDisplays;
     let timeoutIdOnChange = 0;
-    
+
     const getDisplays = opts => Array.prototype.map.call(opts, opt => opt.style.display);
-    
+
     const resetDisplays = (opts, orgDisps) => Array.prototype.forEach.call(opts, (opt, i) => opt.style.display = orgDisps[i]);
-    
+
     const adjustString = s => s ? s.toLowerCase().normalize('NFKC')
                 .replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60))
                 .replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
@@ -115,7 +116,7 @@
             }, 1000);
         }
     };
-    
+
     input.addEventListener('keyup', onFilter);
     input.addEventListener('input', onFilter);
     document.addEventListener('click', e => {
@@ -127,7 +128,7 @@
                 resetDisplays(options, originalDisplays);
             }
             timeoutIdOnChange = 0;
-            
+
             select = e.target;
             options = select.getElementsByTagName('option');
             originalDisplays = getDisplays(options);
@@ -140,8 +141,6 @@
                 appendStyleSheet(input.id);
             }
             dataList.id = dataList.id || getDatalistId();
-
-            
 
             input.setAttribute('list', dataList.id);
             document.body.appendChild(dataList);
