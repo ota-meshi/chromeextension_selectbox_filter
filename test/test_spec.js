@@ -159,7 +159,7 @@ describe("delay event suite", () => {
         const input = select.previousSibling;
         expect(input.tagName.toLowerCase()).toBe('input');
         
-        input.value = 'test';
+        input.value = 'tes';
         keyup(input);
         
         let dispOptions = getDiaplayOptions(select);
@@ -212,7 +212,7 @@ describe("delay event 2 suite", () => {
         
         waits(500).runs(() => {
             expect(spy).not.toHaveBeenCalled();
-            input.value = 'test';
+            input.value = 'tes';
             keyup(input);
         })
         .waits(600).runs(() => {
