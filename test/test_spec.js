@@ -1,4 +1,4 @@
-/*eslint-env es6 */
+﻿/*eslint-env es6 */
 
 'use strict';
 
@@ -89,6 +89,27 @@ describe('filter suite', () => {
 
 		let dispOptions = getDiaplayOptions(select);
 		expect(dispOptions.length).toBe(1);
+	});
+
+	it('filter empty', () => {
+		const select = $('<select><option value="1">option1</option><option value="2">option2-hit</option><option value="3">option3</option></select>')[0];
+		$('#test').append(select);
+		ctrlClick(select);
+		const input = select.previousSibling;
+		expect(input.tagName.toLowerCase()).toBe('input');
+
+		input.value = 'hit';
+		keyup(input);
+
+		let dispOptions = getDiaplayOptions(select);
+		expect(dispOptions.length).toBe(1);
+		expect(select.selectedIndex).toBe(1);
+
+		input.value = '';
+		keyup(input);
+		dispOptions = getDiaplayOptions(select);
+		expect(dispOptions.length).toBe(3);
+		expect(select.selectedIndex).toBe(1);
 	});
 });
 

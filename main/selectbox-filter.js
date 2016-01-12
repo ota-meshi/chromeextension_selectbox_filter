@@ -1,4 +1,4 @@
-/*eslint-env es6*/
+﻿/*eslint-env es6*/
 (() => {
 	'use strict';
 	const appendStyleSheet = (inputId) => {
@@ -82,7 +82,7 @@
 				option.style.display = originalDisplays[i];
 				if (originalDisplays[i] !== 'none') {
 					dispOpts.push(i);
-					if (option.label || option.textContent === value) {
+					if (adjustString(option.label || option.textContent) === value) {
 						hitIndex = i;
 					}
 				}
