@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://jasmine.github.io/edge/lib/jasmine.css"/>
+		<script src="https://jasmine.github.io/edge/lib/jasmine.js"></script>
+		<script src="https://jasmine.github.io/edge/lib/jasmine-html.js"></script>
+		<script src="https://jasmine.github.io/edge/lib/boot.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script>
+			chrome = {
+				extension : {
+					getURL : function(path) {
+						return '../main' + path;
+					},
+				},
+			};
+		</script>
+		<script src="../main/selectbox-filter.js"></script>
+		<script src="./test_spec.js"></script>
+	</head>
+	<body>
+		<select id="language">
+			<option value="ar">アラビア語</option>
+			<option value="it">イタリア語</option>
+			<option value="in">インドネシア語</option>
+			<option value="uk">ウクライナ語</option>
+			<option value="et">エストニア語</option>
+			<option value="nl">オランダ語</option>
+			<option value="ca">カタロニア語</option>
+			<option value="el">ギリシャ語</option>
+			<option value="gu">グジャラート語</option>
+			<option value="hr">クロアチア語</option>
+			<option value="sv">スウェーデン語</option>
+			<option value="es">スペイン語</option>
+			<option value="es_419">スペイン語 (ラテンアメリカ)</option>
+			<option value="sk">スロバキア語</option>
+			<option value="sl">スロベニア語</option>
+			<option value="sr">セルビア語</option>
+			<option value="th">タイ語</option>
+			<option value="ta">タミル語</option>
+			<option value="cs">チェコ語</option>
+			<option value="te">テルグ語</option>
+			<option value="da">デンマーク語</option>
+			<option value="de">ドイツ語</option>
+			<option value="tr">トルコ語</option>
+			<option value="no">ノルウェー語</option>
+			<option value="hu">ハンガリー語</option>
+			<option value="hi">ヒンディー語</option>
+			<option value="fil">フィリピノ語</option>
+			<option value="fi">フィンランド語</option>
+			<option value="fr">フランス語</option>
+			<option value="bg">ブルガリア語</option>
+			<option value="vi">ベトナム語</option>
+			<option value="iw">ヘブライ語</option>
+			<option value="fa">ペルシア語</option>
+			<option value="bn">ベンガル語</option>
+			<option value="pt_BR">ポルトガル語 (ブラジル)</option>
+			<option value="pt_PT">ポルトガル語 (ポルトガル)</option>
+			<option value="pl">ポーランド語</option>
+			<option value="mr">マラーティー語</option>
+			<option value="ml">マラヤーラム語</option>
+			<option value="ms">マレー語</option>
+			<option value="lv">ラトビア語</option>
+			<option value="lt">リトアニア語</option>
+			<option value="ro">ルーマニア語</option>
+			<option value="ru">ロシア語</option>
+			<option value="en">英語</option>
+			<option value="en_US">英語 (アメリカ合衆国)</option>
+			<option value="en_GB">英語 (イギリス)</option>
+			<option value="ko">韓国語</option>
+			<option value="zh_TW">中国語 (台湾)</option>
+			<option value="zh_CN">中国語 (中国)</option>
+			<option value="ja" selected="">日本語</option>
+		</select>
+		<select id="chars">
+			<option>abcd</option>
+			<option>ｱｲｳｴｵ</option>
+		</select>
+		<select id="disp">
+			<option>display</option>
+			<option style="display:none;">display:none</option>
+		</select>
+		<div id="test"></div>
+	</body>
+</html>
