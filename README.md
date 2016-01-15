@@ -2,6 +2,9 @@
 Chromeのextentionです。  
 https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh?hl=ja  
 
+# [Demo](http://ota-meshi.github.io/chromeextension_selectbox_filter/#demo)
+
+
 # Chrome Extention説明
 select boxをCtrl+Clickするとフィルタモードになり、隣に入力欄が出現します。  
 出現した入力欄にフィルタしたいキーワードを入力してください。  
