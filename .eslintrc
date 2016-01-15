@@ -192,4 +192,7 @@
   "globals": {
     "chrome" : true
   },
+  "plugins": [
+    "html"
+  ]
 }
