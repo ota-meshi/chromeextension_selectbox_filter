@@ -85,7 +85,7 @@
 			input.value = 'disp';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(1);
 		});
 
@@ -124,7 +124,7 @@
 			input.value = 'test';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(1);
 			expect(spy).toHaveBeenCalled();
 		});
@@ -141,7 +141,7 @@
 			input.value = 'test';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(1);
 			expect(spy).toHaveBeenCalled();
 		});
@@ -158,7 +158,7 @@
 			input.value = 'test';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(1);
 			expect(spy).toHaveBeenCalled();
 		});
@@ -183,7 +183,7 @@
 			input.value = 'tes';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(2);
 			expect(spy).not.toHaveBeenCalled();
 
@@ -231,7 +231,7 @@
 			input.value = 'te';
 			keyup(input);
 
-			let dispOptions = getDiaplayOptions(select);
+			const dispOptions = getDiaplayOptions(select);
 			expect(dispOptions.length).toBe(2);
 			expect(spy).not.toHaveBeenCalled();
 

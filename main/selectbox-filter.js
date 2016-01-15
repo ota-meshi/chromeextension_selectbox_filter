@@ -1,6 +1,6 @@
 ﻿(() => {
 	'use strict';
-	const appendStyleSheet = (inputId) => {
+	const appendStyleSheet = inputId => {
 		const style = document.createElement('style');
 		style.innerHTML = '#' + inputId + '::-webkit-calendar-picker-indicator {opacity: 0;}';
 		const head = document.getElementsByTagName('head')[0];
@@ -8,8 +8,8 @@
 	};
 
 	const getUniqueId = prefix => {
-		let ran = Math.floor(Math.random() * 10000000);
-		let canId = prefix + ran;
+		const ran = Math.floor(Math.random() * 10000000);
+		const canId = prefix + ran;
 		if (document.getElementById(canId)) {
 			return getUniqueId(prefix);
 		} else {
@@ -40,14 +40,14 @@
 
 	const getDisplays = opts => Array.prototype.map.call(opts, opt => opt.style.display);
 
-	const resetDisplays = (opts, orgDisps) => Array.prototype.forEach.call(opts, (opt, i) => opt.style.display = orgDisps[i]);
+	const resetDisplays = (opts, orgDisps) => Array.prototype.forEach.call(opts, (opt, i) => (opt.style.display = orgDisps[i]));
 
 	const adjustString = s => s ? s.toLowerCase().normalize('NFKC').
 		replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60)).
 		replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
 				: '';
 
-	const optionsToDatalist = (opts) => {
+	const optionsToDatalist = opts => {
 		let html = '';
 		Array.prototype.forEach.call(opts, (opt, i) => {
 			if (opt.style.display !== 'none') {
@@ -97,7 +97,7 @@
 			timeoutIdOnChange = 0;
 		}
 		if (dispOpts.length > 0) {
-			let aftSelectIndex = hitIndex >= 0 ? hitIndex : (dispOpts.indexOf(befSelectedIndex) >= 0 ? befSelectedIndex : dispOpts[0]);
+			const aftSelectIndex = hitIndex >= 0 ? hitIndex : (dispOpts.indexOf(befSelectedIndex) >= 0 ? befSelectedIndex : dispOpts[0]);
 			if (aftSelectIndex !== befSelectedIndex) {
 				select.selectedIndex = aftSelectIndex;
 				if (dispOpts.length === 1) {
@@ -109,7 +109,7 @@
 			}
 		}
 		if (delayOnChange) {
-			let sel = select;
+			const sel = select;
 			timeoutIdOnChange = setTimeout(() => {
 				onchange(sel);
 			}, 1000);
