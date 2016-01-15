@@ -1,5 +1,4 @@
-﻿/*eslint-env es6*/
-(() => {
+﻿(() => {
 	'use strict';
 	const appendStyleSheet = (inputId) => {
 		const style = document.createElement('style');
