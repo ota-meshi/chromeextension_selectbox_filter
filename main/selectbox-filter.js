@@ -43,9 +43,9 @@
 
 	const resetDisplays = (opts, orgDisps) => Array.prototype.forEach.call(opts, (opt, i) => opt.style.display = orgDisps[i]);
 
-	const adjustString = s => s ? s.toLowerCase().normalize('NFKC')
-				.replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60))
-				.replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
+	const adjustString = s => s ? s.toLowerCase().normalize('NFKC').
+		replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60)).
+		replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
 				: '';
 
 	const optionsToDatalist = (opts) => {
@@ -77,7 +77,7 @@
 		const dispOpts = [];
 		let hitIndex = -1;
 
-		Array.prototype.forEach.call(options ,(option, i) => {
+		Array.prototype.forEach.call(options, (option, i) => {
 			if (match(option)) {
 				option.style.display = originalDisplays[i];
 				if (originalDisplays[i] !== 'none') {
