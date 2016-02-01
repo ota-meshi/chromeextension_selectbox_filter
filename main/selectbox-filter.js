@@ -27,9 +27,13 @@
 	input.setAttribute('type', 'search');
 	input.setAttribute('placeholder', 'enter filter keyword');
 	input.setAttribute('autocomplete', 'on');
-	input.style.backgroundImage = 'url("' + chrome.extension.getURL('/icons/icon16.png') + '")';
-	input.style.backgroundRepeat = 'no-repeat';
-	input.style.backgroundPosition = 'right';
+	const setupInputStyle = input => {
+		input.removeAttribute('style');
+		input.style.backgroundImage = 'url("' + chrome.extension.getURL('/icons/icon16.png') + '")';
+		input.style.backgroundRepeat = 'no-repeat';
+		input.style.backgroundPosition = 'right';
+		input.removeAttribute('disabled');
+	};
 
 	const dataList = document.createElement('datalist');
 
@@ -115,6 +119,13 @@
 			}, 1000);
 		}
 	};
+	const off = () => {
+		resetDisplays(options, originalDisplays);
+		options = null;
+		select = null;
+		originalDisplays = null;
+		input.parentElement.removeChild(input);
+	};
 
 	input.addEventListener('keyup', onFilter);
 	input.addEventListener('input', onFilter);
@@ -132,6 +143,7 @@
 			options = select.getElementsByTagName('option');
 			originalDisplays = getDisplays(options);
 			input.value = '';
+			setupInputStyle(input);
 			select.parentElement.insertBefore(input, select);
 			input.focus();
 
@@ -145,6 +157,8 @@
 			document.body.appendChild(dataList);
 
 			optionsToDatalist(options);
+		} else if (e.ctrlKey && e.target === input) {
+			off();
 		}
 	});
 })();

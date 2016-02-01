@@ -246,6 +246,35 @@
 			}).done();
 		});
 
+	});
+
+	describe('mode suite', () => {
+		it('off', () => {
+			const select = $('<select><option value="1">option1</option><option value="2">option2</option></select>')[0];
+			$('#test').append(select);
+			ctrlClick(select);
+			const input = select.previousSibling;
+			expect(input.tagName.toLowerCase()).toBe('input');
+
+			ctrlClick(input);
+			const notinput = select.previousSibling;
+			expect(notinput.tagName.toLowerCase()).not.toBe('input');
+		});
+
+		it('reset disabled', () => {
+			const select = $('<select><option value="1">option1</option><option value="2">option2</option></select>')[0];
+			$('#test').append(select);
+			ctrlClick(select);
+			const input = select.previousSibling;
+			expect(input.tagName.toLowerCase()).toBe('input');
+			input.setAttribute('disabled', true);
+
+			ctrlClick(input);
+			ctrlClick(select);
+
+			expect(input.getAttribute('disabled')).toBe(null);
+		});
+
 		if (window.jscoverage_report) {
 			window.jscoverage_report();
 		}
