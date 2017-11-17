@@ -1,6 +1,6 @@
-﻿{
+{
 	"name": "Select box filter",
-	"version": "1.1.４",
+	"version": "1.1.4",
 	"manifest_version": 2,
 	"description": "select boxをCtrl+Click（Command+Click）するとフィルタモードになり、隣に入力欄が出現します。出現した入力欄にフィルタしたいキーワードを入力すると選択肢がフィルタされます。",
 	"icons": {
