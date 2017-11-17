@@ -130,7 +130,7 @@
 	input.addEventListener('keyup', onFilter);
 	input.addEventListener('input', onFilter);
 	document.addEventListener('click', e => {
-		if (e.ctrlKey && e.target.tagName.toLowerCase() === 'select') {
+		if ((e.ctrlKey || e.metaKey) && e.target.tagName.toLowerCase() === 'select') {
 			if (select === e.target) {
 				return;
 			}
