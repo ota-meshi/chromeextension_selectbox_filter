@@ -157,7 +157,7 @@
 			document.body.appendChild(dataList);
 
 			optionsToDatalist(options);
-		} else if (e.ctrlKey && e.target === input) {
+		} else if ((e.ctrlKey || e.metaKey) && e.target === input) {
 			off();
 		}
 	});
