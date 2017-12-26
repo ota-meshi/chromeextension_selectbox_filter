@@ -2,6 +2,10 @@
 Chromeのextentionです。  
 https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh?hl=ja  
 
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/users/ohgdgoglcbcfofphmmnkkdbpffklhjgh.svg)](https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ohgdgoglcbcfofphmmnkkdbpffklhjgh.svg)](https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/stars/ohgdgoglcbcfofphmmnkkdbpffklhjgh.svg)](https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh)
+
 # [Demo](http://ota-meshi.github.io/chromeextension_selectbox_filter/#demo)
 
 
