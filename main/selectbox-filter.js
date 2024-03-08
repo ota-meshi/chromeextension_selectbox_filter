@@ -29,7 +29,7 @@
 	input.setAttribute('autocomplete', 'on');
 	const setupInputStyle = input => {
 		input.removeAttribute('style');
-		input.style.backgroundImage = 'url("' + chrome.extension.getURL('/icons/icon16.png') + '")';
+		input.style.backgroundImage = 'url("' + chrome.runtime.getURL('/icons/icon16.png') + '")';
 		input.style.backgroundRepeat = 'no-repeat';
 		input.style.backgroundPosition = 'right';
 		input.removeAttribute('disabled');
@@ -49,7 +49,7 @@
 	const adjustString = s => s ? s.toLowerCase().normalize('NFKC').
 		replace(/[ァ-ン]/g, s => String.fromCharCode(s.charCodeAt(0) - 0x60)).
 		replace(/[！-～]/g, s => String.fromCharCode(s.charCodeAt(0) - 0xFEE0))
-				: '';
+		: '';
 
 	const optionsToDatalist = opts => {
 		let html = '';

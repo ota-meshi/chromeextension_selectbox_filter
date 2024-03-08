@@ -44,7 +44,6 @@
 		'no-caller': 2,
 		'no-div-regex': 2,
 		// 'no-else-return': 2, // else内のreturn禁止
-		'no-empty-label': 2,
 		'no-eq-null': 2,
 		'no-eval': 2,
 		'no-extend-native': 2, // ネイティブオブジェクトの拡張を許可しない
@@ -151,12 +150,10 @@
 		'semi-spacing': 2, //セミコロン前後の空白 設定は後ろだけ必要
 		'semi': 2,
 		// 'sort-vars': 2, // varのソートを強制
-		'space-after-keywords': 2, // キーワード（if・else・forなど）の後の空白を強制
-		'space-before-blocks': 2, // ブロック前の空白を強制
+		'keyword-spacing': 2,
 		// 'space-before-function-paren': 2, // function括弧前後の空白を強制
 		'space-in-parens': 2, // 「(」後「)」前のスペースは不要
 		'space-infix-ops': 2, // 演算子前後のスペース
-		'space-return-throw-case': 2,
 		'space-unary-ops': 2,
 		// 'spaced-comment': 2, // コメントの開始終了時の空白
 		// 'wrap-regex': 2, // 正規表現オブジェクト宣言時の括弧を強制

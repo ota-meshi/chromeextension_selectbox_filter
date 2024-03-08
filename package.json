@@ -1,0 +1,18 @@
+{
+  "name": "chromeextension_selectbox_filter",
+  "version": "1.1.5",
+  "description": "Chromeのextentionです。   https://chrome.google.com/webstore/detail/select-box-filter/ohgdgoglcbcfofphmmnkkdbpffklhjgh?hl=ja",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "author": "Yosuke Ota",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-html": "^8.0.0"
+  }
+}
